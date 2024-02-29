@@ -29,19 +29,19 @@ export interface DynamodbClientOptions {
   secretKey?: string;
 }
 
-type GetResult = Modify<GetItemCommandOutput, {
+export type GetResult = Modify<GetItemCommandOutput, {
   Item: DynamoObject;
 }>;
 
-type PutResult = PutItemCommandOutput;
+export type PutResult = PutItemCommandOutput;
 
-type PutBatchResult = BatchWriteItemCommandOutput;
+export type PutBatchResult = BatchWriteItemCommandOutput;
 
-type DeleteBatchResult = BatchWriteItemCommandOutput;
+export type DeleteBatchResult = BatchWriteItemCommandOutput;
 
 type CondSpec = string;
 
-interface KeyConditionSpec {
+export interface KeyConditionSpec {
   partition?: {
     key: string;
     value: string | number;
@@ -53,7 +53,7 @@ interface KeyConditionSpec {
   };
 }
 
-interface QueryOptions {
+export interface QueryOptions {
   keyCondition?: KeyConditionSpec;
   limit?: number;
   scanForward?: boolean;
@@ -61,7 +61,7 @@ interface QueryOptions {
   index?: string;
 }
 
-type QueryResult = Modify<QueryCommandOutput, {
+export type QueryResult = Modify<QueryCommandOutput, {
   Items: DynamoObject[];
   LastEvaluatedKey?: DynamoObject;
 }>;
