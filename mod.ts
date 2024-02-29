@@ -1,20 +1,21 @@
 import {
   BatchWriteItemCommand,
+  type BatchWriteItemCommandOutput,
   DynamoDBClient,
   GetItemCommand,
+  type GetItemCommandOutput,
   PutItemCommand,
+  type PutItemCommandOutput,
   QueryCommand,
-} from "npm:@aws-sdk/client-dynamodb";
-import type {
-  BatchWriteItemCommandOutput,
-  GetItemCommandOutput,
-  PutItemCommandOutput,
-  QueryCommandInput,
-  QueryCommandOutput,
-} from "npm:@aws-sdk/client-dynamodb";
-import { marshall, unmarshall } from "npm:@aws-sdk/util-dynamodb";
-import type { NativeAttributeValue } from "npm:@aws-sdk/util-dynamodb";
-import debug from "npm:debug";
+  type QueryCommandInput,
+  type QueryCommandOutput,
+} from "https://deno.land/x/aws_sdk@v3.5.0.0/client-dynamodb/mod.ts";
+import {
+  marshall,
+  type NativeAttributeValue,
+  unmarshall,
+} from "https://deno.land/x/aws_sdk@v3.5.0.0/util-dynamodb/mod.ts";
+import debug from "npm:debug@4.3.4";
 
 const rootLog = debug("dynamodb-client");
 const requestLog = rootLog.extend("request");
