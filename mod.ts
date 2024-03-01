@@ -9,12 +9,12 @@ import {
   QueryCommand,
   type QueryCommandInput,
   type QueryCommandOutput,
-} from "https://deno.land/x/aws_sdk@v3.5.0.0/client-dynamodb/mod.ts";
+} from "npm:@aws-sdk/client-dynamodb@3";
 import {
   marshall,
   type NativeAttributeValue,
   unmarshall,
-} from "https://deno.land/x/aws_sdk@v3.5.0.0/util-dynamodb/mod.ts";
+} from "npm:@aws-sdk/util-dynamodb@3";
 import debug from "npm:debug@4.3.4";
 
 const rootLog = debug("dynamodb-client");
