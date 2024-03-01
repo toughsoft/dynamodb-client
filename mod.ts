@@ -15,10 +15,13 @@ import {
   type NativeAttributeValue,
   unmarshall,
 } from "npm:@aws-sdk/util-dynamodb@3";
-import debug from "npm:debug@4.3.4";
+import * as log from "https://deno.land/std@0.218.2/log/mod.ts";
 
-const rootLog = debug("dynamodb-client");
-const requestLog = rootLog.extend("request");
+export const LoggerId = "@toughsoft/dynamodb-client";
+
+function logger() {
+  return log.getLogger(LoggerId);
+}
 
 type Modify<T, R> = Omit<T, keyof R> & R;
 
@@ -195,9 +198,7 @@ const create = (
       params.IndexName = index;
     }
 
-    if (requestLog.enabled) {
-      requestLog(`scan: ${JSON.stringify(params)}`);
-    }
+    logger().debug("scan", params);
 
     const output = await client.send(new QueryCommand(params));
 
@@ -216,9 +217,7 @@ const create = (
       Item: marshall(item),
     };
 
-    if (requestLog.enabled) {
-      requestLog(`put: ${JSON.stringify(params)}`);
-    }
+    logger().debug("put", params);
 
     return client.send(new PutItemCommand(params));
   };
@@ -239,9 +238,7 @@ const create = (
       },
     };
 
-    if (requestLog.enabled) {
-      requestLog(`putBatch: ${JSON.stringify(params)}`);
-    }
+    logger().debug("putBatch", params);
 
     return client.send(new BatchWriteItemCommand(params));
   };
@@ -262,9 +259,7 @@ const create = (
       },
     };
 
-    if (requestLog.enabled) {
-      requestLog(`deleteBatch: ${JSON.stringify(params)}`);
-    }
+    logger().debug("deleteBatch", params);
 
     return client.send(new BatchWriteItemCommand(params));
   };
