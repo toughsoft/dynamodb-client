@@ -91,6 +91,8 @@ const SortSubs = {
 const create = (
   { region, accessKey, secretKey }: DynamodbClientOptions = {},
 ): DynamodbClient => {
+  logger().debug("creating client");
+
   const clientOptions = {};
 
   if (region) {
@@ -198,7 +200,7 @@ const create = (
       params.IndexName = index;
     }
 
-    logger().debug("scan", params);
+    logger().debug("query", params);
 
     const output = await client.send(new QueryCommand(params));
 
